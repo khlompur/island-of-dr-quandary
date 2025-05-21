@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Island of Dr. Quandary</title>
+  <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas {
+      width: 640px;
+      height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="dosbox"></canvas>
+  <script>
+    Dos(document.getElementById("dosbox")).run("drquand.zip", "./WHAT.EXE");
+  </script>
+</body>
+</html>
