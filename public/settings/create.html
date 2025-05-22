@@ -1,0 +1,50 @@
+<div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add game bundle to library</h5>
+            </div>
+            <form action="#" id="createForm" method="post" enctype="multipart/form-data"
+                class="needs-validation" novalidate>
+                <input type="hidden" id="createImageUrl" name="img">
+                <input type="hidden" id="createDescription" name="description">
+                <select class="d-none" id="createDevelopers" name="developers" multiple></select>
+                <select class="d-none" id="createPublishers" name="publishers" multiple></select>
+                <select class="d-none" id="createGenres" name="genres" multiple></select>
+
+                <input type="hidden" id="createYear" name="year">
+                <input type="hidden" id="createTrailerUrl" name="trailer">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="createFile" class="form-label">Game bundle *</label>
+                        <input class="form-control" type="file" id="createFile" name="file" accept=".jsdos" required>
+                        <div class="invalid-feedback">
+                            Please add a game bundle file.
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="createName" class="form-label">Name *</label>
+                        <div class="col">
+                            <input type="text" class="form-control auto-caret" id="createName" name="name" required>
+                            <div class="invalid-feedback">
+                                Please add a game name.
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" id="createButtonFind">Find metadata</button>
+                        </div>
+                    </div>
+                    <div id="createDiv"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="createModalClose">Close</button>
+                    <button type="button" class="btn btn-secondary" id="createModalSave" disabled>Save changes</button>
+                    <button class="btn btn-secondary d-none" type="button" id="createModalSpinner" disabled>
+                        <span class="spinner-border spinner-border-sm"></span>
+                        <span role="status">Saving...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

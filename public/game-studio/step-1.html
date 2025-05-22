@@ -1,0 +1,54 @@
+<div class="modal fade" id="createBundleStepOneModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create game bundle - Load zipped game</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-auto me-auto">
+                            <label for="createBundleStepOneFile" class="form-label">Select zip file *</label>
+                        </div>
+                        <div class="col me-auto">
+                            <i class="bi bi-info-circle align-baseline" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true"
+                            data-bs-title="Please add a zipped file with all game files <i>contained</i> in the root folder<br><p><strong>Correct</strong><br><u>my_zip.zip</u><br>+ file1.ext<br>+ file2.ext<br>+ file3.exe<br>+ folder1<br>+ folder1/anotherfile.ext</p><p><strong>Incorrect</strong><br><u>my_zip.zip</u><br>+ rootfolder/file1.ext<br>+ rootfolder/file2.ext<br>+ rootfolder/file3.exe<br>+ rootfolder/folder1<br>+ rootfolder/folder1/anotherfile.ext</p>"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col me-auto">
+                            <input class="form-control" type="file" id="createBundleStepOneFile" name="file" accept=".zip" required>
+                            <div class="invalid-feedback">
+                                Please add a zipped game.
+                            </div>
+                        </div>
+                        <div class="col-auto me-auto">
+                            <button type="button" class="btn btn-primary" id="createBundleLoadButton">Load</button>
+                            <button class="btn btn-secondary d-none" type="button" id="createBundleStepOneModalSpinner" disabled>
+                                <span class="spinner-border spinner-border-sm"></span>
+                                <span role="status">Working...</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 d-none" id="panelExecutables">
+                    <div class="row">
+                        <div class="col me-auto">
+                            <h5 class="card-title">Select executable</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col me-auto">
+                            <div class="btn-group-vertical" role="group" aria-label="Select executable" id="radioExecutables"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="createBundleStepOneModalClose">Close</button>
+                <button type="button" class="btn btn-primary" id="createBundleStepOneModalNext" data-bs-target="#createBundleStepTwoModal" data-bs-toggle="modal" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+</div>

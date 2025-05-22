@@ -1,0 +1,66 @@
+<div class="modal fade no-caret" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit game</h5>
+            </div>
+            <form action="/api/gameEntry/update" id="editForm" method="post" class="needs-validation" novalidate>
+                <input type="hidden" id="editId" name="id">
+                <input type="hidden" id="editIgdbId" name="igdb_id">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Name *</label>
+                        <input type="text" class="form-control auto-caret" id="editName" name="name" required>
+                        <div class="invalid-feedback">
+                            Please add a game name.
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row">
+                            <div class="col-auto me-auto">
+                                <label for="editCoverFile" class="form-label">Cover</label>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary py-1" id="buttonEyeEditCover" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleEditCover" aria-expanded="false">
+                                    <i class="bi bi-eye" id="eyeEditCover"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse show card-body" id="collapsibleEditCover">
+                        <input type="file" id="editCoverFile" name="cover" accept="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDescription" class="form-label">Description</label>
+                        <textarea class="form-control auto-caret" id="editDescription" rows="3"
+                            name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDevelopers" class="form-label">Developers</label>
+                        <select class="form-control auto-caret" id="editDevelopers" name="developers" multiple></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPublishers" class="form-label">Publishers</label>
+                        <select class="form-control auto-caret" id="editPublishers" name="publishers" multiple></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editGenres" class="form-label">Genres</label>
+                        <select class="form-control auto-caret" id="editGenres" name="genres" multiple></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editYear" class="form-label">Release</label>
+                        <input type="text" class="form-control auto-caret" id="editYear" name="year">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTrailerUrl" class="form-label">Trailer URL</label>
+                        <input type="text" class="form-control auto-caret" id="editTrailerUrl" name="trailer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="editModalSave">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

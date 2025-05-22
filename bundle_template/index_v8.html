@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="version" content="1.3.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web DOS Games</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="/img/favicon.png" rel="icon" type="image/png">
+  <style>
+    body, 
+    html {
+      width: 100%; 
+      height: 100%; 
+      margin: 0; 
+      padding: 0
+    }
+    .row-container {
+      display: flex; 
+      width: 100%; 
+      height: 100%; 
+      flex-direction: column; 
+      overflow: hidden;
+    }
+    .iframe-row {
+      flex-grow: 1; 
+      border: none; 
+      margin: 0; 
+      padding: 0; 
+    }
+  </style>
+</head>
+
+<body>
+<!-- MAIN -->
+<main id="main_container" class="row-container">
+  <!-- HEADER -->
+  <div w3-include-html="/header.html"></div>
+
+  <iframe class="iframe-row" src="game_v8.html"></iframe>
+</main>
+<!-- MAIN -->
+
+<!--  Scripts-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/w3.js"></script>
+<script src="/js/js-dos-version.js"></script>
+<script>
+  w3.includeHTML(function() {
+    initializeColorMode();
+    initializeVersion();
+    initHeader();
+  });
+</script>
+<script src="/js/color-modes.js"></script>
+<script src="/js/common.js"></script>
+
+</body>
+</html>

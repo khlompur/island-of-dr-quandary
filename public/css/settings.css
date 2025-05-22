@@ -1,0 +1,95 @@
+.popover {
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+
+.bootstrap-select.form-control {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+}
+
+.highlight {
+    padding: 0rem !important;
+}
+
+.selectize-input {
+    background-color: var(--bs-body-bg) !important;
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+}
+
+.selectize-dropdown, .selectize-dropdown.form-control {
+    background-color: var(--bs-body-bg) !important;
+}
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    color: var(--bs-body-color) !important;
+}
+
+.selectize-dropdown .create {
+    color: var(--bs-body-color) !important;
+}
+
+.selectize-dropdown, .selectize-dropdown.form-control {
+    background-color: var(--bs-body-bg) !important;
+}
+
+.selectize-dropdown .active:not(.selected) {
+    background: var(--bs-secondary-color) !important;
+    color: var(--bs-body-bg) !important;
+}
+
+.selectize-dropdown .active.create {
+    color: var(--bs-purple) !important;
+}
+
+.selectize-dropdown .active.create.selected {
+    color: var(--bs-purple) !important;
+}
+
+.collapse.card-body {
+    padding-top: 0px !important;
+}
+
+.collapsing.card-body {
+    padding-top: 0px !important;
+}
+
+.tooltip-inner {
+    max-width: none !important;
+    text-align: left !important;
+}
+
+#usersTbody button.bi-trash {
+    padding-top: unset !important;
+    padding-bottom: unset !important;
+}
+
+.file-drag-handle {
+    display: none !important;
+}
+
+.kv-file-rotate {
+    display: none !important;
+}
+
+.file-drop-zone {
+    min-height: fit-content !important;
+    padding: 0px !important;
+}
+
+.krajee-default.file-preview-frame .file-thumbnail-footer {
+    height: fit-content !important;
+}
+
+.file-preview {
+    border-radius: unset !important;
+    border: 0px !important;
+    padding: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.no-caret {
+    caret-color: transparent !important;
+}
+
+.auto-caret {
+    caret-color: auto !important;
+}

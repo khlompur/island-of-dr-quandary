@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta name="version" content="1.3.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    html,
+    body,
+    #jsdos {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .emulator-root {
+      background-color: var(--bs-body-bg) !important;
+    }
+    :root, 
+    [data-bs-theme=light] {
+      --bs-body-bg: #fff;
+    }
+    [data-bs-theme=dark] {
+      --bs-body-bg: #212529;
+    }
+  </style>
+  <script>
+    let deleteRequest = indexedDB.deleteDatabase("js-dos-cache (emulators-ui-saves)");
+    deleteRequest.onerror = function() {
+      console.error("Error", deleteRequest.error);
+    };
+    deleteRequest.onsuccess = function() {
+      console.log(deleteRequest.result);
+    };
+  </script>
+  <script src="/js-dos/js-dos.js"></script>
+  <link href="/js-dos/js-dos.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="jsdos"></div>
+  <script>
+    emulators.pathPrefix = "/js-dos/";
+
+    // pass along Function keys to the emulator instead of being captured by the browser
+    window.addEventListener("keydown", (e) => e.preventDefault());
+
+    let ci;
+    let dos;
+    (async () => {
+      dos = await Dos(document.getElementById("jsdos"));
+      ci = await dos.run(`${window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'))}/bundle.jsdos`);
+
+      activityPolling();
+      const old_onSaveEnded = dos.layers.onSaveEnded;
+      dos.layers.onSaveEnded = async () => {
+        const changes = await ci?.persist();
+        if (changes) {
+          downloadFile(changes, "saves.zip", "application/zip", dos);
+        }
+        old_onSaveEnded.call(dos.layers);
+      };
+    })();
+
+    function downloadFile(data, fileName, mimeType, dos) {
+      const blob = new Blob([data], {
+        type: mimeType,
+      });
+      let formData = new FormData();
+      formData.append("file", blob, fileName);
+      formData.append("gamePath", window.location.pathname.split('/')[2]);
+      ajaxCall(formData, dos);
+    }
+
+    function ajaxCall(formData, dos) {
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('POST', '/api/saveGame/upload', true);
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          dos.layers.notyf.success('Savegame synched to server');
+        } else if (this.readyState == 2 && this.status == 422) {
+          dos.layers.notyf.error('Error while synching to server');
+        }
+      };
+      xhr.send(formData);
+    }
+
+    function sendActivityToParent() {
+      if (window.parent) {
+        window.parent.postMessage('userActive', window.location.origin);
+      }
+    }
+
+    function activityPolling() {
+      const jsdosDiv = document.getElementById("jsdos");
+      jsdosDiv.addEventListener('keydown', sendActivityToParent);
+
+      const divOverlay = document.getElementsByClassName("emulator-mouse-overlay")[0];
+      if (divOverlay) {
+        divOverlay.addEventListener('mousemove', sendActivityToParent);
+        divOverlay.addEventListener('mousedown', sendActivityToParent);
+      }
+    }
+  </script>
+</body>
+
+</html>

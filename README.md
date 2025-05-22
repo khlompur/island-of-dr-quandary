@@ -1,399 +1,229 @@
-[js-dos 6.22](https://js-dos.com)
-===========
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=Plastic&logo=eslint&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=Plastic&logo=docker&logoColor=white)
 
-[![Build Status](https://travis-ci.org/caiiiycuk/js-dos.svg?branch=6.22)](https://travis-ci.org/caiiiycuk/js-dos)
+# wDOSg
 
-6.22 is a javascript library that allows you to run DOS programs in browser. js-dos provides nice and easy to use javascript api over dosbox. Try our <a href="https://dosify.me">demo app</a>.
+A Simple web server to manage and run DOS based games on your browser.
 
-You can found previous version here [v3](https://js-dos.com/index_v3.html)
+## Overview
 
-## Bootstrap (NPX)
+**wDOSg** (web DOS games) is a centralized DOS game library that allows you to fetch metadata from [_IGDB_](https://www.igdb.com/) 
+and run your games on the browser through [_js-dos_](https://github.com/caiiiycuk/js-dos), using a minimalistic configuration.
 
-The fastest way to start with js-dos 6.22 is to use our bootstrap project. You can create simple web page that runs
-digger in browser with this commands:
-```
-npx create-dosbox digger
-cd digger
-npm install
-npm start
---
-firefox 127.0.0.1:8080
-```
+<!--toc:start-->
 
-![Digger in browser](https://github.com/caiiiycuk/create-dosbox/raw/master/digger.gif)
+- [wDOSg](#wDOSg)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Roadmap](#roadmap)
+- [Installation](#installation)
+  - [Game Bundles](#game-bundles)
+  - [How it works](#how-it-works)
+  - [Metadata](#metadata)
+  - [Configuration](#configuration)
+    - [Docker compose example](#docker-compose-example)
 
-Or if you have **ZIP** archive with dos program you can bootstrap it:
-```
-npx create-dosbox my-app archive.zip
-cd my-app
-npm intall
-npm start
-```
+<!--toc:end-->
 
-## How it works
+## Features
 
-Bootstrap script will create simple html page, that have canvas element. This canvas is used as render surface (output window) to dosbox. Also this page have a js-dos inialization script.
+- Centralized repository to host your DOS games
+- Automatically fetches game metadata and artworks from _IGDB_ (requires authentication information)
+- Ability to edit information for games
+- Include manuals / attachments for each game
+- Web access: access your library from anywhere
+- Supports games saving capabilities through _js-dos_ (single browser / device)
+- Dark and light themes
 
-```javascript
-    Dos(canvas).ready((fs, main) => {
-        fs.extract("digger.zip").then(() => {
-            main(["-c", "DIGGER.COM"])
-        });
-    });
-```
+## Screenshots
 
-It contains this initialization steps:
+**Home Screen - Dark Theme**
 
-* `Dos(canvas)` - will return promise that will be resoled when dosbox is ready
-* `ready((fs, main) =>)` - will be called when dosbox is ready to run
-    * `fs` provides [API](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-fs) to work with filesystem, we call `extract` to mount archive contents as C:
-    * `main` provides an entry point to run dosbox like in shell you should pass
-    dosbox command line arguments `main(["-c", "DIGGER.COM"])` means:
-```
-dosbox -c DIGGER.COM
-```
+![Image](https://github.com/user-attachments/assets/0909ed57-f10f-4bdf-b2ce-0946047b379d)
 
-Dos has couple configuration [options](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-options) that you can pass as second argument `Dos(canvas, options)`.
+**Home Screen - Light Theme**
 
-## HTML template
+![Image](https://github.com/user-attachments/assets/45a11325-344d-4ab7-ae47-d406650cb7c6)
 
-You can have same results if just create simple html page:
+**Game Creation: Metadata fetched from IGDB**
 
-```html
-<!doctype html>
-<html lang="en">
+![Image](https://github.com/user-attachments/assets/0b5db5ad-0de1-424f-b23c-9af7079c692b)
 
-<head>
-  <meta charset="utf-8">
-  <title>Digger js-dos 6.22</title>
-  <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
-  <style>
-    canvas {
-      width: 640px;
-      height: 400px;
-    }
-  </style>
-</head>
+**Game Details**
 
-<body>
-  <canvas id="jsdos"></canvas>
-  <script>
-    Dos(document.getElementById("jsdos"), { 
-        wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js" 
-    }).ready((fs, main) => {
-      fs.extract("https://js-dos.com/6.22/current/test/digger.zip").then(() => {
-        main(["-c", "DIGGER.COM"])
-      });
-    });
-  </script>
-</body>
+![Image](https://github.com/user-attachments/assets/b01fa54c-d8ee-4348-9659-0257408bbd49)
 
-</html>
-```
+## Roadmap
 
-## Archives
+- Features
+  - [x] Add / remove games
+  - [x] Edit games information
+  - [x] Download IGDB metadata
+  - [x] Local save games / states
+  - [x] Dark / Light themes
+  - [x] User authentication (local)
+  - [x] User administration
+  - [x] Device local saving
+  - [x] _js-dos_ per-game configuration `v1.2.0`
+  - [x] Add Manuals / Attachments to each game `v1.2.0`
+  - [x] Send registering invites via email `v1.3.0`
+  - [x] Server saving for multiple devices support - (js-dos v7) `v1.3.1`
+  - [x] Password recovery `v1.3.1`
+  - [x] Support for Docker Secrets `v1.3.1`
+  - [x] Game library as list or grid `NEW! v1.3.5`
+  - [x] Support for _js-dos_ v8 `NEW! v1.3.5`
+- Down the line
+  - [ ] Create entry from game folder - as opposed to a _jsdos bundle_ file
+  - [ ] Ability to scan library folder (bulk import)
 
-You can obtain latest build using this links:
+> [!CAUTION]
+> wDOSg has been imagined as a _convenient_ way to run DOS games. Although it requires user authentication, it has not been 
+> designed to be exposed to the open internet.
+> **Make sure** your instance is **NOT** exposed.
 
- - js-dos client api: https://js-dos.com/6.22/current/js-dos.js
- - dosbox wasm wrapper: https://js-dos.com/6.22/current/wdosbox.js
- - dosbox wasm file: https://js-dos.com/6.22/current/wdosbox.wasm.js
+# Installation
 
-**NOTE**: do not try to use this links to serve your copy of dosbox. Because this links always pointing to latest
-version, and newest version can have breaking changes. Is better to use npx bootstrap command (above), or download latest
-version from github [releases](https://github.com/caiiiycuk/js-dos/releases) page.
+> [!TIP]
+> Familiarize with [js-dos](https://github.com/caiiiycuk/js-dos) project to fully understand emulator capabilities.
 
+### Game Bundles
 
-## Npm module
+**wDOSg** currently supports games as [js-dos bundle files](https://js-dos.com/jsdos-bundle.html): a **.zip** archive that 
+contains the game itself and a _js-dos_ configuration file and a _dosbox.conf_ file.
 
-You can use js-dos as npm module.
+Before uploading a game into **wDOSg**, you should pack it. **wDOSg** has a convenient bundle creation feature to do so.
+If you prefer, you can always go through the _Game Studio_ feature from [DOS.Zone](https://dos.zone/studio-v8/) as well.
 
-1) Install module package
+### How it works
 
-```sh
-npm install --save js-dos
-```
+Each game gets deployed into a separated directory, is packed as a js-dos bundle along with a webpage, which is
+ultimately served so the underlying _js-dos_ engine executes the game on screen.
 
-2) Import Dos module with require
+### Metadata
 
-```js
-require("js-dos");
-```
+**wDOSg** uses _IGDB_ as a metadata provider to fetch metadata for your games. To use the _IGDB_ metadata provider, please 
+follow these [instructions](https://api-docs.igdb.com/#account-creation).
 
-This code will automatically inject Dos function into window object. js-dos module also includes typescript sources.
-In typescript environment you can use it with typechecking:
+> [!CAUTION]
+> Starting from _wDOSg v1.3.5_, use of Twitch client *token* is removed in favor of client *secret*, avoiding the need for manual token refreshes.
 
-```ts
-import { DosFactory } from "js-dos";
-require("js-dos");
+### Configuration
 
-const Dos = (window as any).Dos as DosFactory;
-```
+- Docker (Highly recommended)
+- Environment variables:
 
-See example of React component in FAQ section
+| Variable | Description | Default value |
+| --- | --- | --- |
+|`TWITCH_CLIENT_ID`|Your personal Twitch Client ID|Empty|
+|`TWITCH_CLIENT_SECRET`|Your Twitch Client Secret|Empty|
+|`LOG_LEVEL`|info, debug, trace|`info`|
+|`TOKEN_SECRET`|The encryption key for your sessions. Keep this very secure.|`'secret'`|
+|`GAMES_LIBRARY` (*) |Path to your games library (If using docker this variable references its internal location, so make sure the appropriate path gets reflected as a mapped volume)|`'/app/wdosglibrary'`|
+|`DB_PATH` (*)|Path to the sqlite database|`'/app/database/'`|
+|`EMAIL_SERVICE`|Email service wDOSg will use to send invitation emails from|Empty|
+|`EMAIL_USER`|Email account user from which wDOSg will send invitation emails from|Empty|
+|`EMAIL_PASS`|Email account password from which wDOSg will send invitation emails from|Empty|
+|`SERVER_FRIENDLY_URL`|wDOSg hosting site (where users will be redirected for authentication)|Empty|
 
-## API Reference
+(*): _If using docker, it's recommended to leave them as-is, and instead map the corresponding folder to the default value_
 
-Read about api provided by js-dos in [**API Reference**](https://js-dos.com/6.22/docs/)
+#### Docker secrets support:
+Some environment variables are supported to be included as docker secrets instead of plain environment variables, as follows
 
-## FAQ
+| Variable | Description | Default value |
+| --- | --- | --- |
+|`TWITCH_CLIENT_ID_FILE`|Your personal Twitch Client ID|Empty|
+|`TWITCH_CLIENT_SECRET_FILE`|Your Twitch Client Secret|Empty|
+|`TOKEN_SECRET_FILE`|The encryption key for your sessions. Keep this very secure.|`'secret'`|
+|`EMAIL_PASS_FILE`|Email account password from which wDOSg will send invitation emails from|Empty|
 
-### How to pass command line arguments
+#### Docker compose example
 
-Dosbox will be runned with command line arguments that passed in main function:
-```javascript
-    Dos(canvas).ready((fs, main) => {
-        main(["arg1", "arg2", ...])
-    });
-```
-Is equivalent to
-```
-    dosbox arg1 arg2
-```
+The currently recommended way to run the server is via Docker.
 
-### How to change url to wdosbox.js
+This is a simple `docker-compose.yml` example file to start running:
 
-You can do this by passing `wdosboxUrl` property as second argument:
-
-```javascript
-    Dos(canvas, { wdosboxUrl: "/wdosbox.js" }).ready(...);
-```
-
-### How to handle errors
-
-You can handle errors by defining `onerror` property, or by using `catch` of promise.
-
-**`onerror`** style
-
-```javascript
-    Dos(canvas, { onerror: (message) => console.error(message); })
-```
-
-**`catch`** style
-
-```javascript
-    Dos(canvas)
-        .ready((fs, main) => ...)
-        .catch((message) => console.error(message));
+```yaml
+services:
+  wdosg:
+    image: soulraven1980/wdosg:latest
+    container_name: wdosg
+    restart: unless-stopped
+    ports:
+      - 3001:3001 # to access the web client
+    environment:
+      - TWITCH_CLIENT_ID=xxxx # Your IGDB (Twitch) client ID
+      - TWITCH_CLIENT_SECRET=xxxx # Your IGDB (Twitch) client secret
+      - LOG_LEVEL=info # Level of logging to be reflected on console
+      - TOKEN_SECRET=secret # Your key to encrypt the session tokens
+      # - GAMES_LIBRARY=/app/wdosglibrary # If for some reason you need to modify this variable, 
+                                               # make sure mapped volumes are consistent with this value
+      # - DB_PATH=/app/database # If for some reason you need to modify this variable, 
+                                          # make sure mapped volumes are consistent with this value
+      - EMAIL_SERVICE=mymail # Your email service
+      - EMAIL_USER=wdosg@mymail.com # Email user that wDOSg will use
+      - EMAIL_PASS=wodsgpassword # Email user that wDOSg will use
+      - SERVER_FRIENDLY_URL=https://wdosg.com # Your site where wDOSg is hosted
+    volumes:
+      - your_library_location:/app/wdosglibrary # directory containing your library
+      - your_db_location:/app/database # directory containing your database
 ```
 
-**NOTE**: `catch` works only for handling initialization errors
+#### Docker compose example with docker secrets and reverse proxy
+```yaml
+services:
+  wdosg:
+    image: soulraven1980/wdosg:latest
+    container_name: wdosg
+    restart: unless-stopped
+    ports:
+      - 3001:3001 # to access the web client
+    environment:
+      - TWITCH_CLIENT_ID_FILE=/run/secrets/TWITCH_CLIENT_ID # Secret file with your IGDB (Twitch) client ID
+      - TWITCH_CLIENT_SECRET_FILE=/run/secrets/TWITCH_CLIENT_SECRET # Secret file with your IGDB (Twitch) secret
+      - LOG_LEVEL=info # Level of logging to be reflected on console
+      - TOKEN_SECRET_FILE=/run/secrets/TOKEN_SECRET # Secret file with your key to encrypt the session tokens
+      # - GAMES_LIBRARY=/your/games/library/path/ # If for some reason you need to modify this variable, 
+                                               # make sure mapped volumes are consistent with this value
+      # - DB_PATH=/your/wDOSg/database/path/ # If for some reason you need to modify this variable, 
+                                          # make sure mapped volumes are consistent with this value
+      - EMAIL_SERVICE=mymail # Your email service
+      - EMAIL_USER=wdosg@mymail.com # Email user that wDOSg will use
+      - EMAIL_PASS_FILE=/run/secrets/EMAIL_PASS # Secret file with the password for the email that wDOSg will use
+      - SERVER_FRIENDLY_URL=https://wdosg.com # Your site where wDOSg is hosted
+    volumes:
+      - your_library_location:/app/wdosglibrary # directory containing your library
+      - your_db_location:/app/database # directory containing your database
+    networks:
+      - proxy # assuming "proxy" is the network for the reverse proxy (i.e. Traefik)
+    secrets:
+      - TWITCH_CLIENT_ID
+      - TWITCH_CLIENT_SECRET
+      - TOKEN_SECRET
+      - EMAIL_PASS
 
-### How to run command before program (autoexec)
+networks:
+  proxy:
+    external: true
 
-You can
-
-1. Override `dosbox.conf` file and write `[autoexec]` section, as explained in next section
-2. Or you can simply pass additional command line arguments before you program, like:
-   ```
-     main(["-c", "<command>", "-c", "DIGGER.COM"]);
-   ```
-
-### How to override dosbox.conf
-
-By default js-dos uses builtin dosbox [config](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-conf) file.
-However you can override it with your config file. To do this you can simply put file named `dosbox.conf` inside root of
-program archive and then pass command line argument to read it `-c dosbox.conf`. Or you can write this file directly from
-javascript with [fs.createFile](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-fs#dosfs-createfile).
-
-For example, you can add `[autoexec]` section to print dosbox.conf file:
-```javascript
-    Dos(canvas).ready((fs, main) => {
-        fs.createFile("dosbox.conf", `
-            [autoexec]
-            mount c .
-            c:
-            type dosbox~1.con
-        `);
-        main(["-conf", "dosbox.conf"]);
-    });
+secrets:
+   TWITCH_CLIENT_ID:
+     file: secrets/TWITCH_CLIENT_ID
+   TWITCH_CLIENT_SECRET:
+     file: secrets/TWITCH_CLIENT_SECRET
+   TOKEN_SECRET:
+     file: secrets/TOKEN_SECRET
+   EMAIL_PASS:
+     file: secrets/EMAIL_PASS
 ```
 
-### How to disable js-dos loading UI
+Run `docker-compose up -d` in the directory containing your `docker-compose.yml` file to start the service.
 
-By default js-dos will show progress of loading dosbox and extracting archives, but you can disable this feature. To
-do this you need define onprogress handler in [DosOptions](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-options)
+Open http://localhost:3001 (or the port configured on your docker compose file) and enjoy!
 
-```javascript
-    Dos(canvas, { 
-        onprogress: (stage, total, loaded) => {
-            console.log(stage, loaded * 100 / total + "%");
-        },
-    }).ready(...);
+----
+Default admin user: 
 ```
-
-### How to disable logging to console
-
-By default js-dos will log any message using `console.log`, and any error with `console.error`. To disable this you should
-override `log` and `onerror` property
-
-```javascript
-    Dos(canvas, { 
-        log: (message) => { /**/ },
-        onerror: (message) => { /**/ },
-    }).ready(...);
-```
-
-### Resizing canvas
-
-You can easily resize canvas by changing **css** (style) properties `width` and `height`.
-Take attention, you **should not** change width and height properties of canvas.
-
-```html
-<canvas width="640" height="320" style="width: 1280px; height: 640px"></canvas>
-```
-
-Rule is simple: `width/height` properties is used by jsdos as native
-resolution of game/program, but css `width/height` is for changing real size.
-So, for giving example resolution will be 640x320, but canvas size will be 1280x640.
-
-### Mouse locking
-
-By default dosbox mouse will follow browser cursor. However you can change this behaviour by providing `autolock=true` in 
-dosbox.conf. Then mouse starts follow browser cursor after first click (lock), and you can unlock mouse by pressing `CTRL+F10`.
-```javascript
-    Dos(canvas).ready((fs, main) => {
-        fs.createFile("dosbox.conf", `
-            [sdl]
-            autolock=true
-        `);
-        main(["-conf", "dosbox.conf"]);
-    });
-```    
-
-### Multiple dosbox instances on one page
-
-JsDos already support multiple instances, just create new canvas for each jsdos and
-instaniate it normally. Like in this [64k demoscene](/6.22/64k/index.html) example.
-
-### Store user progress between sessions
-
-js-dos file system is in memory file system. It means that every file that you exracted,
-or file that created by game (save file, config, etc.) will be lost on browser restart.
-However it's possible to create directory in file system that will be synced and stored
-inside [indexed db](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API). 
-This type of folder will store it's content across browser restarts. You can create as many
-folders as you want, all of them will be synced.
-
-But, usually only one folder per game needed. So, simplies way to store game progress is
-just extract game archive to different folder (not root `/`). For example:
-
-```javascript
-    Dos(canvas).ready((fs, main) => {
-        fs.extract("game.zip", "/game").then(() => {
-            main(["-c", "cd game", "-c", "game.exe"])
-        });
-    });
-```
-
-As you can see second argument in [`extract`](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-fs#dosfs-extract) method is a path where to extract contents archive, and this path will be automatically mount as persistent (because it's not root `/`).
-
-In other words to store game progress just extract game archive into some folder, and that is.
-
-**NOTE 1: ** Some dos games save game progress when you exit them. If you just close browser before exiting game, some games will lost porgress.
-
-**NOTE 2: ** Do not forget to change directory to correct path before running game.
-
-### Caching js-dos script
-
-No need to cache js-dos scripts, because they are automatically added to indexed db cache, so from every second load js-dos can work in offline mode.
-
-
-### Taking screenshot
-
-When your program is runned you can take screenshot with special [CommandInterface.screenshot()](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-ci). That is returned by main promise:
-```javascript
-Dos(canvas).ready((fs, main) => {
-    fs.extract("digger.zip").then(() => {
-        main(["-c", "DIGGER.COM"]).then((ci) => {
-            ci.screenshot().then((data) => {
-                const w = window.open("about:blank", "image from canvas");
-                w.document.write("<img src='" + data + "' alt='from canvas'/>");
-            });
-        });
-    });
-});
-```
-
-Data is an ImageData from canvas object
-
-### Exiting from js-dos
-
-Sometimes needed to stop execution of dosbox to free resources or whatever. You can do this with [CommandInterface.exit()](https://js-dos.com/6.22/docs/api/generate.html?page=js-dos-ci):
-```javascript
-Dos(canvas).ready((fs, main) => {
-    fs.extract("digger.zip").then(() => {
-        main(["-c", "DIGGER.COM"]).then((ci) => {
-            ci.exit(); // Will stop execution immediately
-        });
-    });
-});
-```
-
-### React component (typescript)
-
-This comonent is only demostrate how you can use js-dos with React framework.
-
-```ts
-import React, { useRef, useEffect } from "react";
-
-import { DosFactory } from "js-dos";
-require("js-dos");
-const Dos = (window as any).Dos as DosFactory;
-
-
-const JsDos: React.FC = () => {
-    const ref = useRef<HTMLCanvasElement>(null);
-
-    useEffect(() => {
-        if (ref !== null) {
-            const ciPromise = Dos(ref.current as HTMLCanvasElement, {
-                wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
-            }).then((runtime) => {
-                return runtime.fs.extract("https://js-dos.com/6.22/current/test/digger.zip").then(() => {
-                    return runtime.main(["-c", "DIGGER.COM"]);
-                });
-            });
-
-            return () => {
-                ciPromise.then(ci => ci.exit());
-            };
-        }
-    }, [ref]);
-
-    return <canvas ref={ref} />;
-}
-
-export default JsDos;
-```
-
-Then you can use it as simple html tag ```<JsDos />```
-
-## Building
-
-Building process have two steps:
-
-1. You need to build emulation layer (dosbox)
-2. You need to build API
-
-### Dosbox
-
-Project uses dosbox as emulation layer for running dos programs. You should build it before building javascript API. To do this you should have emscripten installed in your system and CMake. Build process should be easy if you familar with cmake, just run this commands:
-```
-mkdir build
-cd build
-emcmake cmake ..
-make -j4
-```
-
-### JavaScript API
-
-You can build javascript API with gulp, just type gulp.
-```
-gulp
-```
-
-Output will be placed in dist folder. Also in dist folder you can find test page, you open it in browser. All test should pass.
-```
-firefox dist/test/test.html
+wdosg@wdosg.com / wdosg
 ```
