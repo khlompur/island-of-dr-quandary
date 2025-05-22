@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Island of Dr. Quandary</title>
-    <script src="js-dos.js"></script>
-    <link rel="stylesheet" href="js-dos/js-dos.css" />
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background-color: black;
-      }
-      #dosbox {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="dosbox"></div>
-    <script>
-      Dos(document.getElementById("dosbox"), {
-        wdosboxUrl: "js-dos/",
-        cycles: "auto"
-      }).run("drquand.jsdos");
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Island of Dr. Quandary</title>
+  <!-- load emulator from the js-dos folder -->
+  <script src="js-dos/js-dos.js"></script>
+  <link rel="stylesheet" href="js-dos/js-dos.css" />
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: black; }
+    #dosbox { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="dosbox"></div>
+  <script>
+    Dos(document.getElementById("dosbox"), {
+      wdosboxUrl: "js-dos/emulators",
+      cycles: "auto"
+    }).run("drquand.jsdos");
+  </script>
+</body>
 </html>
