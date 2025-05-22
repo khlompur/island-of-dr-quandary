@@ -3,25 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island of Dr. Quandary (CDN Test)</title>
-  <!-- —— REPLACE THESE LINES —— -->
+  <title>Island of Dr. Quandary (CDN Full Test)</title>
+
+  <!-- Load js-dos v8 via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.css" />
-  <!-- —— END REPLACEMENT —— -->
+
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; background: black; }
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%; background: black;
+    }
     #dosbox { width: 100%; height: 100%; }
   </style>
 </head>
 <body>
   <div id="dosbox"></div>
   <script>
-    // This uses the v8 promise-based API
+    // Initialize emulator, telling it where to load the WASM/emulators
     Dos(document.getElementById("dosbox"), {
-      wdosboxUrl: "js-dos/emulators",
+      wdosboxUrl: "https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/emulators",
       cycles: "auto"
     })
     .then(function (dosRunner) {
+      // Run your .jsdos package
       return dosRunner.runGame("drquand.jsdos");
     })
     .catch(function (err) {
