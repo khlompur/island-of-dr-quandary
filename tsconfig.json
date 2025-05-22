@@ -1,0 +1,16 @@
+{
+    "files": ["js-dos-ts/js-dos.ts"],
+    "compilerOptions": {
+        "target": "es5",
+        "allowJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": false
+      }
+}
