@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island of Dr. Quandary</title>
-  <!-- self-hosted v8 emulator -->
-  <script src="js-dos/js-dos.js"></script>
-  <link rel="stylesheet" href="js-dos/js-dos.css" />
+  <title>Island of Dr. Quandary (CDN Test)</title>
+  <!-- —— REPLACE THESE LINES —— -->
+  <script src="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.css" />
+  <!-- —— END REPLACEMENT —— -->
   <style>
     html, body { margin: 0; padding: 0; height: 100%; background: black; }
     #dosbox { width: 100%; height: 100%; }
@@ -15,13 +16,12 @@
 <body>
   <div id="dosbox"></div>
   <script>
-    // This returns a Promise in v8.x
+    // This uses the v8 promise-based API
     Dos(document.getElementById("dosbox"), {
       wdosboxUrl: "js-dos/emulators",
       cycles: "auto"
     })
     .then(function (dosRunner) {
-      // .runGame() is the v8 method
       return dosRunner.runGame("drquand.jsdos");
     })
     .catch(function (err) {
