@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island of Dr. Quandary (CDN Full Test)</title>
+  <title>Island of Dr. Quandary (Local JS-DOS)</title>
 
-  <!-- Load js-dos v8 via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/js-dos.css" />
+  <!-- Load JS-DOS from your local files -->
+  <script src="js-dos/js-dos.js"></script>
+  <link rel="stylesheet" href="js-dos/js-dos.css" />
 
   <style>
     html, body {
@@ -20,18 +20,10 @@
 <body>
   <div id="dosbox"></div>
   <script>
-    // Initialize emulator, telling it where to load the WASM/emulators
     Dos(document.getElementById("dosbox"), {
-      wdosboxUrl: "https://cdn.jsdelivr.net/npm/js-dos@8.3.19/dist/emulators",
+      wdosboxUrl: "js-dos/emulators", // ✅ Folder that contains wdosbox.js and wdosbox.wasm
       cycles: "auto"
-    })
-    .then(function (dosRunner) {
-      // Run your .jsdos package
-      return dosRunner.runGame("drquand.jsdos");
-    })
-    .catch(function (err) {
-      console.error("DOSBox failed to start:", err);
-    });
+    }).run("drquand.jsdos");
   </script>
 </body>
 </html>
