@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Island of Dr. Quandary</title>
-  <!-- Load the emulator from the js-dos folder -->
+  <!-- self-hosted v8 emulator -->
   <script src="js-dos/js-dos.js"></script>
   <link rel="stylesheet" href="js-dos/js-dos.css" />
   <style>
@@ -15,16 +15,15 @@
 <body>
   <div id="dosbox"></div>
   <script>
-    // Initialize js-dos v8 → returns a Promise
+    // This returns a Promise in v8.x
     Dos(document.getElementById("dosbox"), {
-      wdosboxUrl: "js-dos/emulators",  // where your dosbox.js/.wasm live
+      wdosboxUrl: "js-dos/emulators",
       cycles: "auto"
     })
-    // When ready, run your packaged game
     .then(function (dosRunner) {
+      // .runGame() is the v8 method
       return dosRunner.runGame("drquand.jsdos");
     })
-    // Catch & log errors
     .catch(function (err) {
       console.error("DOSBox failed to start:", err);
     });
