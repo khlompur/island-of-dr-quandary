@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island of Dr. Quandary (Local JS-DOS)</title>
+  <title>Island of Dr. Quandary (Working Build)</title>
 
-  <!-- Load JS-DOS from your local files -->
+  <!-- Load JS-DOS -->
   <script src="js-dos/js-dos.js"></script>
   <link rel="stylesheet" href="js-dos/js-dos.css" />
 
@@ -21,9 +21,15 @@
   <div id="dosbox"></div>
   <script>
     Dos(document.getElementById("dosbox"), {
-      wdosboxUrl: "js-dos/emulators", // ✅ Folder that contains wdosbox.js and wdosbox.wasm
+      wdosboxUrl: "js-dos/emulators", // Folder with wdosbox.js & wdosbox.wasm
       cycles: "auto"
-    }).run("drquand.jsdos");
+    })
+    .then(function (dos) {
+      return dos.run("drquand.jsdos");
+    })
+    .catch(function (err) {
+      console.error("DOSBox failed to start:", err);
+    });
   </script>
 </body>
 </html>
