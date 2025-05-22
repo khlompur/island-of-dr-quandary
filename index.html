@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>DOS Test</title>
-    <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+    <meta charset="utf-8">
+    <title>Island of Dr. Quandary</title>
+    <script src="js-dos.js"></script>
+    <link rel="stylesheet" href="js-dos/js-dos.css">
     <style>
       html, body { margin: 0; height: 100%; background: black; }
       #dosbox { width: 100%; height: 100%; }
@@ -12,7 +14,7 @@
   <body>
     <div id="dosbox"></div>
     <script>
-      Dos(document.getElementById("dosbox")).run("drquand.zip", "./HELLO.BAT");
+      Dos(document.getElementById("dosbox")).run("drquand.jsdos");
     </script>
   </body>
 </html>
